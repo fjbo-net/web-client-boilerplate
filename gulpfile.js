@@ -117,7 +117,11 @@ pkgs.gulp.task(
 			console.clear();
 			pkgs.gulp.series(
 				`build`,
+<<<<<<< HEAD
 				() => console.log(`Watching changes in ${globsToWatch.join(', ')}...`)
+=======
+				() => console.log(`Watching changes in ${globsToWatch.joing(', ')}...`)
+>>>>>>> 65bfd27eabf5ff7f669659e43378040903570a89
 			)();
 			callback();
 		}
