@@ -106,7 +106,7 @@ pkgs.gulp.task(
 
 
 let globsToWatch = [
-	dirs.src + `**/*`,
+	dirs.src + `/**/*`,
 	`README.md`
 ];
 pkgs.gulp.task(
