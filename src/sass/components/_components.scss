@@ -1,1 +1,8 @@
-@import 'components/layout.components';
+@import
+	// Styles that define the overall layout of a project.
+	'components/layout.components',
+
+	// project-specific components
+
+	// Styles for the general use content elements.
+	'components/content.components';
