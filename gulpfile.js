@@ -15,7 +15,7 @@ pkgs = {
 	gulp: require(`gulp`),
 	path: require(`path`),
 	rename: require(`gulp-rename`),
-	sass: require(`gulp-sass`)
+	sass: require(`gulp-sass`)(require('sass'))
 };
 
 pkgs.gulp.task(
