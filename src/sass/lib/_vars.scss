@@ -1,0 +1,106 @@
+// Breakpoints
+$device-breakpoints: (
+	"mobile": 0px,
+	"tablet": 1100px,
+	"desktop": 1366px
+);
+
+@function breakpoint-next($name, $breakpoints: $device-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+	$n: index($breakpoint-names, $name);
+	@if not $n {
+		@error "breakpoint `#{$name}` not found in `#{$breakpoints}`";
+	}
+	@return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+@function breakpoint-min($name, $breakpoints: $device-breakpoints) {
+	$min: map-get($breakpoints, $name);
+	@return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+	$next: breakpoint-next($name, $breakpoints);
+	@return if($next, breakpoint-min($next, $breakpoints) - .02, null);
+}
+
+@mixin media-min($name, $breakpoints: $device-breakpoints) {
+	$min: breakpoint-min($name, $breakpoints);
+
+	@if $min {
+		@media(min-width: $min) {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}
+
+@mixin media-max($name, $breakpoints: $device-breakpoints) {
+	$max: breakpoint-max($name, $breakpoints);
+	@if $max {
+		@media (max-width: $max) {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}
+
+
+// Colors
+$colors: (
+	"primary": rgb(136, 255, 77),
+	"secondary": rgb(61,255,182),
+
+	"font": rgb(240,240,240),
+
+	"background": rgb(57,59,69)
+);
+
+@function color($id) {
+	@return map-get($colors, $id);
+}
+
+// VFX
+/*
+@mixin acrylic($sat:1.8, $blur: 20px) {
+	backdrop-filter: saturate($sat) blur($blur);
+}
+*/
+
+
+// Padding
+@mixin padding-x($value) {
+	padding-left: $value;
+	padding-right: $value;
+}
+
+@mixin padding-y($value) {
+	padding-top: $value;
+	padding-bottom: $value;
+}
+
+
+// Sizing
+$container-widths: (
+	"mobile": 100%,
+	"tablet": 90%,
+	"desktop": 80%
+);
+
+@function container-width($breakpoint-name) {
+	$width: map-get($container-widths, $breakpoint-name);
+	@return if($width, $width, null);
+}
+
+@mixin content-constraint() {
+	width: container-width(mobile);
+
+	@include media-min(tablet) {
+		width: container-width(tablet);
+	}
+
+	@include media-min(desktop) {
+		width: container-width(desktop);
+	}
+}

@@ -1,0 +1,13 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	background-color: color(background);
+	color: color(font);
+
+	* {
+		box-sizing: border-box;
+	}
+}
