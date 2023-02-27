@@ -16,3 +16,7 @@ vendor
 temp
 tmp
 *.log
+
+
+# Visual Studio
+/.vs
